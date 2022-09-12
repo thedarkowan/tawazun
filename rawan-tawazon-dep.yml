@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tawazun-web
+  labels:
+    app: tawazun-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tawazun-web
+  template:
+    metadata:
+      labels:
+        app: tawazun-web
+    spec:
+      containers:
+        - image: nourab/tawazun-sda
+          name: tawazun-web 
+          env:
+            - name: DB_URL
+              value: mysql
+            - name: DB_PORT
+              value: '3306'  
+            - name: DB_NAME
+              value: tawazun  
+            - name: DB_USERNAME
+              value: root  
+            - name: DB_PASSWORD
+              value: DevOps2022
+          ports:
+            - containerPort: 8080
